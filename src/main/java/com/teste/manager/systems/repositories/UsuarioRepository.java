@@ -6,11 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.teste.manager.systems.entities.Usuario;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
 	Optional<Usuario> findByLogin(String login);
-	
-	Boolean existsByLogin(String login);
-	Boolean existsByNome(String nome);
 
 }

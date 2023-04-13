@@ -2,8 +2,8 @@ package com.teste.manager.systems.entities.enums;
 
 public enum RoleList {
 	
-	NAO(0, "ROLE_ADMIN"),
-	SIM(1, "ROLE_CONVIDADO");
+	CONVIDADO(1, "ROLE_CONVIDADO"),
+	ADMIN(2, "ROLE_ADMIN");
 	
 	private int cod;
 	private String descricao;
@@ -26,12 +26,13 @@ public enum RoleList {
 			return null;
 		}
 		
-		for (RoleList x : RoleList.values()) {
-			if (cod.equals(x.getCod())) {
+		for(RoleList x : RoleList.values()) {
+			if(cod.equals(x.getCod())) {
 				return x;
 			}
 		}
-		throw new IllegalArgumentException("Id inválido: " + cod);
+		
+		throw new IllegalArgumentException("Id Invalid: " + cod);
 	}
 
 }

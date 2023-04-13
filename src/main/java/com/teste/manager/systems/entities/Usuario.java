@@ -1,6 +1,10 @@
 package com.teste.manager.systems.entities;
 
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import com.teste.manager.systems.entities.enums.RoleList;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -13,10 +17,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_usuario")
@@ -34,6 +36,20 @@ public class Usuario {
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "roles")
-	private Set<Integer> administrador;
+	private Set<Integer> roles = new HashSet<>();
+	
+	public Usuario() {
+		addRoles(RoleList.CONVIDADO);
+	}
+	
+	public Set<RoleList> getRoleList(){
+		return roles.stream().map(x -> RoleList.toEnum(x)).collect(Collectors.toSet());
+	}
+	
+	public void addRoles(RoleList perfil) {
+		roles.add(perfil.getCod());
+	}
+
+	
 
 }
