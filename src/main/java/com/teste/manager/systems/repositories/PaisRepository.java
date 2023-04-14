@@ -10,12 +10,15 @@ import com.teste.manager.systems.entities.Pais;
 
 public interface PaisRepository extends JpaRepository<Pais, Long>{
 
+	Optional<Pais> findById(Long id);
 	Optional<Pais> findByNome(String nome);
 	Optional<Pais> findBySigla(String sigla);
 	Optional<Pais> findByGentilico(String gentilico);
 	
 	@Query("SELECT obj FROM Pais obj WHERE LOWER(obj.nome) LIKE LOWER(CONCAT('%',:nome,'%'))")
 	List<Pais> findByNomeContains(String nome);
+	
+	Optional<Pais> findByNomeIgnoreCase(String nome);
 	
 	Boolean existsByNome(String nome);
 	Boolean existsBySigla(String sigla);

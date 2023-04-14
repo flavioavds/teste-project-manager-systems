@@ -36,18 +36,18 @@ public class Usuario {
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "roles")
-	private Set<Integer> roles = new HashSet<>();
+	private Set<Integer> administrador = new HashSet<>();
 	
 	public Usuario() {
 		addRoles(RoleList.CONVIDADO);
 	}
 	
 	public Set<RoleList> getRoleList(){
-		return roles.stream().map(x -> RoleList.toEnum(x)).collect(Collectors.toSet());
+		return administrador.stream().map(x -> RoleList.toEnum(x)).collect(Collectors.toSet());
 	}
 	
 	public void addRoles(RoleList perfil) {
-		roles.add(perfil.getCod());
+		administrador.add(perfil.getCod());
 	}
 
 	

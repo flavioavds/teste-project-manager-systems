@@ -1,6 +1,6 @@
 package com.teste.manager.systems.payload.response;
 
-import java.util.Set;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,8 +14,7 @@ import lombok.Setter;
 public class UserInfoResponse {
 	
 	private Long id;
-	private String login;	
-	private String nome;
-	private Set<String> administrador;
+	private String login;
+	private List<String> roles;
 
 }

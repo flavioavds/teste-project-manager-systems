@@ -26,7 +26,6 @@ public class UsuarioDetailsServiceImpl implements UserDetailsService{
 		if(user == null) {
 			logger.error("Email not found: " + login);
 		}
-		System.out.println(user.get());
 		return UsuarioDetailsImpl.build(user.get());
 	}
 
