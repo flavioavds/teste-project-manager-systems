@@ -1,14 +1,14 @@
-package com.teste.manager.systems.entities.enums;
+package com.teste.manager.systems.entities;
 
-public enum RoleList {
+public enum Role {
 	
-	CONVIDADO(1, "ROLE_CONVIDADO"),
-	ADMIN(2, "ROLE_ADMIN");
+	CONVIDADO(0, "ROLE_CONVIDADO"),
+	ADMIN(1, "ROLE_ADMIN");
 	
 	private int cod;
 	private String descricao;
 	
-	private RoleList(int cod, String descricao) {
+	private Role(int cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 	}
@@ -21,12 +21,12 @@ public enum RoleList {
 		return descricao;
 	}
 	
-	public static RoleList toEnum(Integer cod) {
+	public static Role toEnum(Integer cod) {
 		if(cod == null) {
 			return null;
 		}
 		
-		for(RoleList x : RoleList.values()) {
+		for(Role x : Role.values()) {
 			if(cod.equals(x.getCod())) {
 				return x;
 			}

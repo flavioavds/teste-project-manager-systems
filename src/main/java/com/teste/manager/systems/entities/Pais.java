@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_pais")
+@Table(name = "pais")
 public class Pais {
 	
 	@Id
