@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -103,4 +104,18 @@ public class ApplicationExceptionHandler {
 
         return new ErroHandle(erroMap);
     }
+    
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(AccessDeniedException.class)
+    public ErroHandle handleAccessDeniedException(AccessDeniedException exception) {
+        Map<String, String> erroMap = new HashMap<>();
+        erroMap.put("message", exception.getMessage());
+
+        return new ErroHandle(erroMap);
+    }
+        
+//    @ExceptionHandler(AccessDeniedException.class)
+//    public ResponseEntity<String> handleAccessDeniedException1(AccessDeniedException ex) {
+//        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Acesso Negado: " + ex.getMessage());
+//    }
 }
