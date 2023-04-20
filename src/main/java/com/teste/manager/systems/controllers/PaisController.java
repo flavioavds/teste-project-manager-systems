@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -101,7 +102,7 @@ public class PaisController {
 					@ApiResponse(description = "Internal Err", responseCode = "500", content = @Content)
 					
 			})
-	@PostMapping(value = "/salvar")
+	@PostMapping(value = "/salvar", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PaisDTOResponse> create(@RequestBody @Valid PaisDTORequest dto){
 		return ResponseEntity.status(HttpStatus.CREATED).body(paisService.save(dto));
 	}
