@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.teste.manager.systems.dtos.PaisDTORequest;
@@ -43,6 +44,7 @@ public class PaisServiceImpl implements PaisService{
 
 	@Override
 	public PaisDTOResponse save(PaisDTORequest dto) {
+		if(existByNomePais(dto.getNome())) throw new UsernameNotFoundException("Existe um 'Nome' desse país Cadastrado, não é possivel cadastrar novamente!");
 		paisValidated(dto.getNome());
 		paisValidated(dto.getSigla());
 		paisValidated(dto.getGentilico());
@@ -52,6 +54,7 @@ public class PaisServiceImpl implements PaisService{
 	@Override
 	public PaisDTOResponse alterar(Long id, PaisDTORequest dto) {
 		Pais original = paisVerify(id);
+		if(existByNomePais(dto.getNome())) throw new UsernameNotFoundException("Existe um 'Nome' desse país Cadastrado, não é possivel cadastrar novamente!");
 		paisValidated(dto.getNome());
 		original.setNome(dto.getNome());
 		paisValidated(dto.getSigla());
@@ -88,6 +91,18 @@ public class PaisServiceImpl implements PaisService{
 		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException("Usuario já existente!");
 		}
+	}
+	
+	public boolean existByNomePais(String nome) {
+		return paisRepository.existsByNome(nome);
+	}
+	
+	public boolean existBySiglaPais(String sigla) {
+		return paisRepository.existsBySigla(sigla);
+	}
+	
+	public boolean existByGentilicoPais(String gentilico) {
+		return paisRepository.existsByGentilico(gentilico);
 	}
 
 
